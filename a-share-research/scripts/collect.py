@@ -32,7 +32,7 @@ def get_history(code):
     last_error = None
     for attempt in range(3):
         try:
-            df = ak.stock_zh_a_hist(
+            df = ak.stock_zh_a_hist_em(
                 symbol=code,
                 period="daily",
                 start_date="20240101",
@@ -76,7 +76,7 @@ def evaluate(code, name, df):
     return {
         "code": code,
         "name": name,
-        "data_source": "AKShare stock_zh_a_hist (Eastmoney)",
+        "data_source": "AKShare stock_zh_a_hist_em (Eastmoney)",
         "price_adjustment": "qfq",
         "latest_trade_date": latest["日期"].strftime("%Y-%m-%d"),
         "last_close_cny": num(latest["收盘"]),
