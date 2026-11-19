@@ -80,7 +80,7 @@ def evaluate(code, name, df):
         "price_adjustment": "qfq",
         "latest_trade_date": latest["日期"].strftime("%Y-%m-%d"),
         "last_close_cny": num(latest["收盘"]),
-        "last_volume_shares_reported": num(latest["成交量"]),
+        "last_volume_native_unit": num(latest["成交量"]),
         "last_turnover_pct": num(latest["换手率"]),
         "last_amount_cny": num(latest["成交额"]),
         "last_20d_avg_amount_cny": num(last20),
