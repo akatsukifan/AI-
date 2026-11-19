@@ -65,13 +65,19 @@ def evaluate(code, name, df):
     close = df["收盘"]
     amount = df["成交额"]
     latest = df.iloc[-1]
+    now_cn = datetime.now(ZoneInfo("Asia/Shanghai"))
+    is_intraday = (latest["日期"].date() == now_cn.date() and
+                   (now_cn.hour, now_cn.minute) < (15, 10))
+    last_complete = df.iloc[-2] if is_intraday else latest
+    # A 20-day average should never mix 19 complete sessions with a partial current session.
+    complete_amount = amount.iloc[:-1] if is_intraday else amount
     peak = close.tail(252).max()
 
     def ret(days):
         return num((close.iloc[-1] / close.iloc[-(days + 1)] - 1) * 100) if len(close) > days else None
 
-    last20 = amount.tail(20).mean()
-    prev20 = amount.iloc[-40:-20].mean() if len(amount) >= 40 else None
+    last20 = complete_amount.tail(20).mean()
+    prev20 = complete_amount.iloc[-40:-20].mean() if len(complete_amount) >= 40 else None
 
     return {
         "code": code,
@@ -79,7 +85,10 @@ def evaluate(code, name, df):
         "data_source": "AKShare stock_zh_a_hist_em (Eastmoney)",
         "price_adjustment": "qfq",
         "latest_trade_date": latest["日期"].strftime("%Y-%m-%d"),
-        "last_close_cny": num(latest["收盘"]),
+        "latest_bar_status": "intraday" if is_intraday else "completed",
+        "latest_observed_price_cny": num(latest["收盘"]),
+        "last_complete_trade_date": last_complete["日期"].strftime("%Y-%m-%d"),
+        "last_complete_close_cny": num(last_complete["收盘"]),
         "last_volume_native_unit": num(latest["成交量"]),
         "last_turnover_pct": num(latest["换手率"]),
         "last_amount_cny": num(latest["成交额"]),
@@ -109,7 +118,7 @@ def main():
             rows.append(report)
             # A full history CSV is intentionally public, and contains market data only.
             df.to_csv(OUT / f"{code}_qfq_daily.csv", index=False, date_format="%Y-%m-%d")
-            print(f"{code} {name}: {report['latest_trade_date']}, {report['last_close_cny']}")
+            print(f"{code} {name}: {report['latest_trade_date']} {report['latest_bar_status']}, {report['latest_observed_price_cny']}")
         except Exception as exc:
             errors[code] = str(exc)
             print(f"ERROR {code}: {exc}", file=sys.stderr)
@@ -129,17 +138,17 @@ def main():
         "# A股公开行情观察",
         f"更新：{now.strftime('%Y-%m-%d %H:%M')}（北京时间）",
         "",
-        "数据源：AKShare / 东方财富日线，前复权；不是实时行情，不含私人投资数据。",
+        "数据源：AKShare / 东方财富日线，前复权；交易时段内是盘中快照，非最终收盘价，不含私人投资数据。",
         "",
-        "| 股票 | 最新交易日 | 收盘价(元) | 20日涨跌幅 | 60日涨跌幅 | 120日涨跌幅 | 距252日最高价 | 换手率 |",
+        "| 股票 | 数据日期/状态 | 最新价(元) | 20日涨跌幅 | 60日涨跌幅 | 120日涨跌幅 | 距252日最高价 | 换手率 |",
         "|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     def fmt(x):
         return "—" if x is None else f"{x:.2f}"
     for r in rows:
         md.append(
-            f"| {r['name']}({r['code']}) | {r['latest_trade_date']} "
-            f"| {fmt(r['last_close_cny'])} | {fmt(r['return_20d_pct'])}% "
+            f"| {r['name']}({r['code']}) | {r['latest_trade_date']} / {'盘中' if r['latest_bar_status']=='intraday' else '已收盘'} "
+            f"| {fmt(r['latest_observed_price_cny'])} | {fmt(r['return_20d_pct'])}% "
             f"| {fmt(r['return_60d_pct'])}% | {fmt(r['return_120d_pct'])}% "
             f"| {fmt(r['distance_from_252d_high_pct'])}% | {fmt(r['last_turnover_pct'])}% |"
         )
