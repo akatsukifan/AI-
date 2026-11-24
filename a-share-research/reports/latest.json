@@ -1,16 +1,9 @@
 {
-  "updated_at_china": "2026-11-24T19:09:26.222501+08:00",
+  "updated_at_china": "2026-11-25T03:42:09.895678+08:00",
   "expected_trade_date": "2026-11-24",
   "calendar_source": "Sina trading calendar",
   "collection_status": "completed",
-  "provider_warnings": {
-    "600183": {
-      "Eastmoney": "东方财富 push2 行情服务器断开了连接，通常是短时间内请求过多，当前 IP 被临时限流。首次限流一般约 5 分钟后恢复，反复触发后可能需要 40 分钟以上；等待期间不要重复调用东方财富的行情接口，否则会延长限流。"
-    },
-    "601138": {
-      "Eastmoney": "skipped after provider connection/rate-limit failure"
-    }
-  },
+  "provider_warnings": {},
   "retained_history_dates": {},
   "scope": "public market data only; no trading advice",
   "price_adjustment": "qfq",
@@ -18,7 +11,7 @@
     {
       "code": "600183",
       "name": "生益科技",
-      "data_source": "AKShare (Sina)",
+      "data_source": "AKShare (Eastmoney)",
       "volume_unit": "lots (100 shares)",
       "price_adjustment": "qfq",
       "latest_trade_date": "2026-11-24",
@@ -26,22 +19,22 @@
       "latest_observed_price_cny": 61.6,
       "last_complete_trade_date": "2026-11-24",
       "last_complete_close_cny": 61.6,
-      "last_volume_native_unit": 1228024.93,
-      "last_turnover_pct": 5.0918,
+      "last_volume_native_unit": 1228025.0,
+      "last_turnover_pct": 5.09,
       "last_amount_cny": 7913462777.0,
       "last_20d_avg_amount_cny": 6984889227.95,
       "prev_20d_avg_amount_cny": 6495773752.85,
       "last_20d_vs_prev_20d_amount_pct": 7.5297,
       "return_20d_pct": -36.8917,
       "return_60d_pct": -51.2272,
-      "return_120d_pct": -55.9497,
+      "return_120d_pct": -55.9434,
       "distance_from_252d_high_pct": -67.094,
       "history_rows": 700
     },
     {
       "code": "601138",
       "name": "工业富联",
-      "data_source": "AKShare (Sina)",
+      "data_source": "AKShare (Eastmoney)",
       "volume_unit": "lots (100 shares)",
       "price_adjustment": "qfq",
       "latest_trade_date": "2026-11-24",
@@ -49,16 +42,16 @@
       "latest_observed_price_cny": 40.96,
       "last_complete_trade_date": "2026-11-24",
       "last_complete_close_cny": 40.96,
-      "last_volume_native_unit": 2804916.36,
-      "last_turnover_pct": 1.4135,
+      "last_volume_native_unit": 2804916.0,
+      "last_turnover_pct": 1.41,
       "last_amount_cny": 11708071336.0,
       "last_20d_avg_amount_cny": 6112340224.05,
       "prev_20d_avg_amount_cny": 4146056933.5,
       "last_20d_vs_prev_20d_amount_pct": 47.4254,
       "return_20d_pct": -10.8014,
       "return_60d_pct": -32.1854,
-      "return_120d_pct": -43.5502,
-      "distance_from_252d_high_pct": -48.8767,
+      "return_120d_pct": -43.6976,
+      "distance_from_252d_high_pct": -49.0547,
       "history_rows": 700
     }
   ],
