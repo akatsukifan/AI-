@@ -35,7 +35,10 @@ START = "20240101"
 def expected_session(now):
     cutoff = now.date() if (now.hour, now.minute) >= (15, 10) else now.date() - timedelta(days=1)
     try:
-        calendar = ak.tool_trade_date_hist_sina()
+        calendar_fn = getattr(ak, "calendar_trade_date_hist_sina", None) or getattr(ak, "tool_trade_date_hist_sina", None)
+        if calendar_fn is None:
+            raise RuntimeError("AKShare trading calendar API unavailable")
+        calendar = calendar_fn()
         dates = pd.to_datetime(calendar["trade_date"], errors="coerce").dropna()
         if dates.empty or dates.max().date() < cutoff:
             # The calendar must cover the requested period, even if it is a weekend.
@@ -106,7 +109,11 @@ def get_history(code, expected):
                 raw = ak.stock_zh_a_hist_em(symbol=code, period="daily",
                                           start_date=START, end_date=end, adjust="qfq")
             else:
-                func = getattr(ak, "stock_zh_a_hist_sina", None) or ak.stock_zh_a_daily
+                func = (getattr(ak, "stock_zh_a_hist_sina", None) or
+                        getattr(ak, "stock_zh_a_daily_sina", None) or
+                        getattr(ak, "stock_zh_a_daily", None))
+                if func is None:
+                    raise RuntimeError("AKShare Sina history API unavailable")
                 raw = func(symbol="sh" + code, start_date=START, end_date=end, adjust="qfq")
             df = normalize(raw, provider, expected)
             return df, provider, errors

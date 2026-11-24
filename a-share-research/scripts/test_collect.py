@@ -49,7 +49,7 @@ class CollectorTests(unittest.TestCase):
 
     def test_calendar_before_close(self):
         now = datetime(2026, 11, 24, 12, 17, tzinfo=ZoneInfo("Asia/Shanghai"))
-        with patch.object(collect.ak, "tool_trade_date_hist_sina", return_value=pd.DataFrame({"trade_date": ["2026-11-20", "2026-11-23", "2026-11-24"]})):
+        with patch.object(collect.ak, "calendar_trade_date_hist_sina", return_value=pd.DataFrame({"trade_date": ["2026-11-20", "2026-11-23", "2026-11-24"]}), create=True):
             self.assertEqual(collect.expected_session(now)[0], date(2026, 11, 23))
 
 
