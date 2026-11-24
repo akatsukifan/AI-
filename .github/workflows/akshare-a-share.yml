@@ -33,9 +33,13 @@ jobs:
           cache-dependency-path: a-share-research/requirements.txt
       - name: Install data library
         run: python -m pip install -r a-share-research/requirements.txt
+      - name: Test collector (offline fixtures)
+        run: python -m unittest discover -s a-share-research/scripts -p 'test_*.py'
       - name: Fetch two public A-share stock histories
+        id: collect
         run: python a-share-research/scripts/collect.py
       - name: Upload collected data to repo
+        if: ${{ !cancelled() && (steps.collect.outcome == 'success' || steps.collect.outcome == 'failure') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
