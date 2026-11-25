@@ -47,6 +47,21 @@ class CollectorTests(unittest.TestCase):
                     self.assertIn("Eastmoney", warnings)
                 self.assertEqual(em.call_count, 1)
 
+    def test_recent_listing_has_no_252_day_metric(self):
+        raw = fixture().tail(80)
+        df = collect.normalize(raw, "Sina", date(2026, 11, 23), "688825")
+        r = collect.evaluate("688825", "test", df, "Sina")
+        self.assertIsNone(r["return_120d_pct"])
+        self.assertIsNone(r["distance_from_252d_high_pct"])
+        self.assertIsNotNone(r["return_20d_pct"])
+        self.assertIsNotNone(r["distance_from_observed_history_high_pct"])
+
+    def test_shenzhen_sina_symbol(self):
+        with patch.object(collect.ak, "stock_zh_a_hist_em", side_effect=RuntimeError("429 rate limit")):
+            with patch.object(collect.ak, "stock_zh_a_hist_sina", return_value=fixture(), create=True) as sina:
+                collect.get_history("002463", date(2026, 11, 23))
+                self.assertEqual(sina.call_args.kwargs["symbol"], "sz002463")
+
     def test_calendar_before_close(self):
         now = datetime(2026, 11, 24, 12, 17, tzinfo=ZoneInfo("Asia/Shanghai"))
         with patch.object(collect.ak, "calendar_trade_date_hist_sina", return_value=pd.DataFrame({"trade_date": ["2026-11-20", "2026-11-23", "2026-11-24"]}), create=True):

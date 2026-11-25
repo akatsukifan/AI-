@@ -16,7 +16,10 @@ BASE = Path(__file__).resolve().parents[1]
 OUT = BASE / "reports"
 OUT.mkdir(parents=True, exist_ok=True)
 
-STOCKS = {"600183": "生益科技", "601138": "工业富联"}
+STOCKS = {"600183": "生益科技", "601138": "工业富联",
+          "002463": "沪电股份", "688825": "长鑫科技"}
+# Newly listed stocks cannot provide a full year of historical observations.
+LISTED = {"688825": "2026-07-27"}
 NEEDED = ["日期", "开盘", "收盘", "最高", "最低", "成交量", "成交额", "换手率"]
 
 
@@ -56,7 +59,7 @@ def expected_session(now):
         return cutoff, "weekday fallback; holiday calendar unverified"
 
 
-def normalize(raw, provider, expected):
+def normalize(raw, provider, expected, code=None):
     if raw is None or raw.empty:
         raise ValueError("empty dataset")
     df = raw.copy()
@@ -81,10 +84,11 @@ def normalize(raw, provider, expected):
     for col in NEEDED[1:]:
         df[col] = pd.to_numeric(df[col], errors="coerce").replace([float("inf"), -float("inf")], float("nan"))
     df = df.dropna(subset=["日期"]).sort_values("日期")
-    df = df[(df["日期"] >= pd.Timestamp("2024-01-01")) & (df["日期"].dt.date <= expected)]
+    df = df[(df["日期"] >= pd.Timestamp(LISTED.get(code, "2024-01-01"))) & (df["日期"].dt.date <= expected)]
     df = df.drop_duplicates("日期", keep="last").reset_index(drop=True)
     prices = ["开盘", "收盘", "最高", "最低"]
-    if len(df) < 253 or df[prices].isna().any().any() or (df[prices] <= 0).any().any():
+    minimum = 21 if code in LISTED else 253
+    if len(df) < minimum or df[prices].isna().any().any() or (df[prices] <= 0).any().any():
         raise ValueError("insufficient or invalid OHLC history")
     if (df["最高"] + 0.011 < df[["开盘", "收盘", "最低"]].max(axis=1)).any() or (df["最低"] - 0.011 > df[["开盘", "收盘", "最高"]].min(axis=1)).any():
         raise ValueError("invalid OHLC bounds")
@@ -114,8 +118,9 @@ def get_history(code, expected):
                         getattr(ak, "stock_zh_a_daily", None))
                 if func is None:
                     raise RuntimeError("AKShare Sina history API unavailable")
-                raw = func(symbol="sh" + code, start_date=START, end_date=end, adjust="qfq")
-            df = normalize(raw, provider, expected)
+                prefix = "sh" if code.startswith("6") else "sz"
+                raw = func(symbol=prefix + code, start_date=START, end_date=end, adjust="qfq")
+            df = normalize(raw, provider, expected, code)
             return df, provider, errors
         except Exception as ex:
             errors[provider] = str(ex)[:500]
@@ -136,7 +141,7 @@ def evaluate(code, name, df, provider="Eastmoney"):
     last_complete = df.iloc[-2] if is_intraday else latest
     # A 20-day average should never mix 19 complete sessions with a partial current session.
     complete_amount = amount.iloc[:-1] if is_intraday else amount
-    peak = close.tail(252).max()
+    peak = close.tail(252).max() if len(close) >= 252 else None
 
     def ret(days):
         return num((close.iloc[-1] / close.iloc[-(days + 1)] - 1) * 100) if len(close) > days else None
@@ -171,6 +176,8 @@ def evaluate(code, name, df, provider="Eastmoney"):
         "return_120d_pct": ret(120),
         "distance_from_252d_high_pct": num((close.iloc[-1] / peak - 1) * 100)
         if peak and pd.notna(peak) else None,
+        "distance_from_observed_history_high_pct": num((close.iloc[-1] / close.max() - 1) * 100),
+        "first_trade_date_in_history": df.iloc[0]["日期"].strftime("%Y-%m-%d"),
         "history_rows": len(df),
     }
 
