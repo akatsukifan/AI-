@@ -1,17 +1,11 @@
 {
-  "updated_at_china": "2026-11-25T20:57:03.992314+08:00",
+  "updated_at_china": "2026-11-26T02:50:17.653425+08:00",
   "expected_trade_date": "2026-11-25",
   "calendar_source": "Sina trading calendar",
   "collection_status": "completed",
   "provider_warnings": {
-    "600183": {
-      "Eastmoney": "东方财富 push2 行情服务器断开了连接，通常是短时间内请求过多，当前 IP 被临时限流。首次限流一般约 5 分钟后恢复，反复触发后可能需要 40 分钟以上；等待期间不要重复调用东方财富的行情接口，否则会延长限流。"
-    },
-    "601138": {
-      "Eastmoney": "skipped after provider connection/rate-limit failure"
-    },
     "002463": {
-      "Eastmoney": "skipped after provider connection/rate-limit failure"
+      "Eastmoney": "东方财富 push2 行情服务器断开了连接，通常是短时间内请求过多，当前 IP 被临时限流。首次限流一般约 5 分钟后恢复，反复触发后可能需要 40 分钟以上；等待期间不要重复调用东方财富的行情接口，否则会延长限流。"
     },
     "688825": {
       "Eastmoney": "skipped after provider connection/rate-limit failure"
@@ -24,7 +18,7 @@
     {
       "code": "600183",
       "name": "生益科技",
-      "data_source": "AKShare (Sina)",
+      "data_source": "AKShare (Eastmoney)",
       "volume_unit": "lots (100 shares)",
       "price_adjustment": "qfq",
       "latest_trade_date": "2026-11-25",
@@ -32,15 +26,15 @@
       "latest_observed_price_cny": 58.43,
       "last_complete_trade_date": "2026-11-25",
       "last_complete_close_cny": 58.43,
-      "last_volume_native_unit": 766878.79,
-      "last_turnover_pct": 3.1798,
+      "last_volume_native_unit": 766879.0,
+      "last_turnover_pct": 3.18,
       "last_amount_cny": 4588431023.0,
       "last_20d_avg_amount_cny": 6925839049.15,
       "prev_20d_avg_amount_cny": 6340934098.4,
       "last_20d_vs_prev_20d_amount_pct": 9.2243,
       "return_20d_pct": -42.9896,
       "return_60d_pct": -54.7054,
-      "return_120d_pct": -56.68,
+      "return_120d_pct": -56.6639,
       "distance_from_252d_high_pct": -68.7874,
       "distance_from_observed_history_high_pct": -68.7874,
       "first_trade_date_in_history": "2024-01-02",
@@ -49,7 +43,7 @@
     {
       "code": "601138",
       "name": "工业富联",
-      "data_source": "AKShare (Sina)",
+      "data_source": "AKShare (Eastmoney)",
       "volume_unit": "lots (100 shares)",
       "price_adjustment": "qfq",
       "latest_trade_date": "2026-11-25",
@@ -57,17 +51,17 @@
       "latest_observed_price_cny": 39.61,
       "last_complete_trade_date": "2026-11-25",
       "last_complete_close_cny": 39.61,
-      "last_volume_native_unit": 1241292.47,
-      "last_turnover_pct": 0.6255,
+      "last_volume_native_unit": 1241292.0,
+      "last_turnover_pct": 0.63,
       "last_amount_cny": 4979379330.0,
       "last_20d_avg_amount_cny": 6086762975.9,
       "prev_20d_avg_amount_cny": 4179667264.7,
       "last_20d_vs_prev_20d_amount_pct": 45.6279,
       "return_20d_pct": -18.565,
       "return_60d_pct": -34.148,
-      "return_120d_pct": -45.6653,
-      "distance_from_252d_high_pct": -50.5617,
-      "distance_from_observed_history_high_pct": -50.5617,
+      "return_120d_pct": -45.814,
+      "distance_from_252d_high_pct": -50.7338,
+      "distance_from_observed_history_high_pct": -50.7338,
       "first_trade_date_in_history": "2024-01-02",
       "history_rows": 701
     },
