@@ -1,130 +1,14 @@
 {
-  "updated_at_china": "2026-11-26T14:54:22.011873+08:00",
+  "updated_at_china": "2026-11-27T01:37:47.491036+08:00",
   "target_trade_date": "2026-11-26",
   "calendar_source": "Sina trading calendar",
   "scope": "public minute prices only; no orders",
-  "status": "collected",
-  "stocks": [
-    {
-      "code": "600183",
-      "name": "生益科技",
-      "trade_date": "2026-11-26",
-      "source": "AKShare (Eastmoney)",
-      "price_adjustment": "none",
-      "bar_period": "1m",
-      "first": "2026-11-26 09:30:00",
-      "last": "2026-11-26 14:54:00",
-      "last_close": 61.78,
-      "bars": 235,
-      "morning": {
-        "bars": 121,
-        "first": "2026-11-26 09:30:00",
-        "last": "2026-11-26 11:30:00",
-        "low": 59.2,
-        "high": 62.8,
-        "last_close": 61.49
-      },
-      "afternoon": {
-        "bars": 114,
-        "first": "2026-11-26 13:01:00",
-        "last": "2026-11-26 14:54:00",
-        "low": 60.5,
-        "high": 62.01,
-        "last_close": 61.78
-      },
-      "warnings": {},
-      "file": "2026-11-26/600183.csv"
-    },
-    {
-      "code": "601138",
-      "name": "工业富联",
-      "trade_date": "2026-11-26",
-      "source": "AKShare (Eastmoney)",
-      "price_adjustment": "none",
-      "bar_period": "1m",
-      "first": "2026-11-26 09:30:00",
-      "last": "2026-11-26 14:54:00",
-      "last_close": 40.93,
-      "bars": 235,
-      "morning": {
-        "bars": 121,
-        "first": "2026-11-26 09:30:00",
-        "last": "2026-11-26 11:30:00",
-        "low": 39.96,
-        "high": 41.51,
-        "last_close": 40.93
-      },
-      "afternoon": {
-        "bars": 114,
-        "first": "2026-11-26 13:01:00",
-        "last": "2026-11-26 14:54:00",
-        "low": 40.4,
-        "high": 41.18,
-        "last_close": 40.93
-      },
-      "warnings": {},
-      "file": "2026-11-26/601138.csv"
-    },
-    {
-      "code": "002463",
-      "name": "沪电股份",
-      "trade_date": "2026-11-26",
-      "source": "AKShare (Eastmoney)",
-      "price_adjustment": "none",
-      "bar_period": "1m",
-      "first": "2026-11-26 09:30:00",
-      "last": "2026-11-26 14:54:00",
-      "last_close": 81.0,
-      "bars": 235,
-      "morning": {
-        "bars": 121,
-        "first": "2026-11-26 09:30:00",
-        "last": "2026-11-26 11:30:00",
-        "low": 80.0,
-        "high": 84.48,
-        "last_close": 81.43
-      },
-      "afternoon": {
-        "bars": 114,
-        "first": "2026-11-26 13:01:00",
-        "last": "2026-11-26 14:54:00",
-        "low": 79.6,
-        "high": 82.16,
-        "last_close": 81.0
-      },
-      "warnings": {},
-      "file": "2026-11-26/002463.csv"
-    },
-    {
-      "code": "688825",
-      "name": "长鑫科技",
-      "trade_date": "2026-11-26",
-      "source": "AKShare (Eastmoney)",
-      "price_adjustment": "none",
-      "bar_period": "1m",
-      "first": "2026-11-26 09:30:00",
-      "last": "2026-11-26 14:54:00",
-      "last_close": 32.37,
-      "bars": 235,
-      "morning": {
-        "bars": 121,
-        "first": "2026-11-26 09:30:00",
-        "last": "2026-11-26 11:30:00",
-        "low": 33.01,
-        "high": 34.15,
-        "last_close": 33.32
-      },
-      "afternoon": {
-        "bars": 114,
-        "first": "2026-11-26 13:01:00",
-        "last": "2026-11-26 14:54:00",
-        "low": 32.17,
-        "high": 33.68,
-        "last_close": 32.37
-      },
-      "warnings": {},
-      "file": "2026-11-26/688825.csv"
-    }
-  ],
-  "errors": {}
+  "status": "partial_or_failed",
+  "stocks": [],
+  "errors": {
+    "600183": "{\"Eastmoney\": \"东方财富 push2 行情服务器断开了连接，通常是短时间内请求过多，当前 IP 被临时限流。首次限流一般约 5 分钟后恢复，反复触发后可能需要 40 分钟以上；等待期间不要重复调用东方财富的行情接口，否则会延长限流。\", \"Sina\": \"AKShare Sina minute API unavailable\"}",
+    "601138": "{\"Eastmoney\": \"skipped after provider failure\", \"Sina\": \"AKShare Sina minute API unavailable\"}",
+    "002463": "{\"Eastmoney\": \"skipped after provider failure\", \"Sina\": \"AKShare Sina minute API unavailable\"}",
+    "688825": "{\"Eastmoney\": \"skipped after provider failure\", \"Sina\": \"AKShare Sina minute API unavailable\"}"
+  }
 }
