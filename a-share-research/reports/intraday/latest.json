@@ -1,6 +1,6 @@
 {
-  "updated_at_china": "2026-11-27T01:37:47.491036+08:00",
-  "target_trade_date": "2026-11-26",
+  "updated_at_china": "2026-11-27T18:05:02.631135+08:00",
+  "target_trade_date": "2026-11-27",
   "calendar_source": "Sina trading calendar",
   "scope": "public minute prices only; no orders",
   "status": "partial_or_failed",
