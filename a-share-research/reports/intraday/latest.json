@@ -1,14 +1,130 @@
 {
-  "updated_at_china": "2026-11-27T18:05:02.631135+08:00",
+  "updated_at_china": "2026-11-27T18:46:22.782884+08:00",
   "target_trade_date": "2026-11-27",
   "calendar_source": "Sina trading calendar",
   "scope": "public minute prices only; no orders",
-  "status": "partial_or_failed",
-  "stocks": [],
-  "errors": {
-    "600183": "{\"Eastmoney\": \"东方财富 push2 行情服务器断开了连接，通常是短时间内请求过多，当前 IP 被临时限流。首次限流一般约 5 分钟后恢复，反复触发后可能需要 40 分钟以上；等待期间不要重复调用东方财富的行情接口，否则会延长限流。\", \"Sina\": \"AKShare Sina minute API unavailable\"}",
-    "601138": "{\"Eastmoney\": \"skipped after provider failure\", \"Sina\": \"AKShare Sina minute API unavailable\"}",
-    "002463": "{\"Eastmoney\": \"skipped after provider failure\", \"Sina\": \"AKShare Sina minute API unavailable\"}",
-    "688825": "{\"Eastmoney\": \"skipped after provider failure\", \"Sina\": \"AKShare Sina minute API unavailable\"}"
-  }
+  "status": "collected",
+  "stocks": [
+    {
+      "code": "600183",
+      "name": "生益科技",
+      "trade_date": "2026-11-27",
+      "source": "AKShare (Eastmoney)",
+      "price_adjustment": "none",
+      "bar_period": "1m",
+      "first": "2026-11-27 09:30:00",
+      "last": "2026-11-27 15:00:00",
+      "last_close": 68.04,
+      "bars": 241,
+      "morning": {
+        "bars": 121,
+        "first": "2026-11-27 09:30:00",
+        "last": "2026-11-27 11:30:00",
+        "low": 60.74,
+        "high": 64.55,
+        "last_close": 64.1
+      },
+      "afternoon": {
+        "bars": 120,
+        "first": "2026-11-27 13:01:00",
+        "last": "2026-11-27 15:00:00",
+        "low": 64.67,
+        "high": 68.04,
+        "last_close": 68.04
+      },
+      "warnings": {},
+      "file": "2026-11-27/600183.csv"
+    },
+    {
+      "code": "601138",
+      "name": "工业富联",
+      "trade_date": "2026-11-27",
+      "source": "AKShare (Eastmoney)",
+      "price_adjustment": "none",
+      "bar_period": "1m",
+      "first": "2026-11-27 09:30:00",
+      "last": "2026-11-27 15:00:00",
+      "last_close": 44.74,
+      "bars": 241,
+      "morning": {
+        "bars": 121,
+        "first": "2026-11-27 09:30:00",
+        "last": "2026-11-27 11:30:00",
+        "low": 40.66,
+        "high": 42.11,
+        "last_close": 41.79
+      },
+      "afternoon": {
+        "bars": 120,
+        "first": "2026-11-27 13:01:00",
+        "last": "2026-11-27 15:00:00",
+        "low": 41.99,
+        "high": 44.82,
+        "last_close": 44.74
+      },
+      "warnings": {},
+      "file": "2026-11-27/601138.csv"
+    },
+    {
+      "code": "002463",
+      "name": "沪电股份",
+      "trade_date": "2026-11-27",
+      "source": "AKShare (Eastmoney)",
+      "price_adjustment": "none",
+      "bar_period": "1m",
+      "first": "2026-11-27 09:30:00",
+      "last": "2026-11-27 15:00:00",
+      "last_close": 89.2,
+      "bars": 241,
+      "morning": {
+        "bars": 121,
+        "first": "2026-11-27 09:30:00",
+        "last": "2026-11-27 11:30:00",
+        "low": 80.15,
+        "high": 86.7,
+        "last_close": 85.85
+      },
+      "afternoon": {
+        "bars": 120,
+        "first": "2026-11-27 13:01:00",
+        "last": "2026-11-27 15:00:00",
+        "low": 86.1,
+        "high": 89.2,
+        "last_close": 89.2
+      },
+      "warnings": {},
+      "file": "2026-11-27/002463.csv"
+    },
+    {
+      "code": "688825",
+      "name": "长鑫科技",
+      "trade_date": "2026-11-27",
+      "source": "AKShare (Eastmoney)",
+      "price_adjustment": "none",
+      "bar_period": "1m",
+      "first": "2026-11-27 09:30:00",
+      "last": "2026-11-27 15:00:00",
+      "last_close": 36.93,
+      "bars": 241,
+      "morning": {
+        "bars": 121,
+        "first": "2026-11-27 09:30:00",
+        "last": "2026-11-27 11:30:00",
+        "low": 32.46,
+        "high": 33.8,
+        "last_close": 33.68
+      },
+      "afternoon": {
+        "bars": 120,
+        "first": "2026-11-27 13:01:00",
+        "last": "2026-11-27 15:00:00",
+        "low": 33.75,
+        "high": 36.98,
+        "last_close": 36.93
+      },
+      "warnings": {},
+      "file": "2026-11-27/688825.csv"
+    }
+  ],
+  "errors": {}
 }
